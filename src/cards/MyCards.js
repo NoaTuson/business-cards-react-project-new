@@ -141,10 +141,7 @@ const renderEditForm = () => {
           fullWidth
         />
       ))}
-      <FormControlLabel
-        control={<Checkbox checked={editingCard.favorite} onChange={e => setEditingCard({ ...editingCard, favorite: e.target.checked })} name="favorite" />}
-        label="Mark as favorite"
-      />
+
       <Button type="submit" variant="contained" color="primary">Save Changes</Button>
       <Button onClick={() => setEditingCard(null)}>Cancel</Button>
     </form>
