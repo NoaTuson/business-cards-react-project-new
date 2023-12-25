@@ -40,3 +40,20 @@
 }
 
 
+.card-form, .card-edit-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card-form input, 
+.card-form .MuiFormControl-root,
+.card-edit-form input, 
+.card-edit-form .MuiFormControl-root {
+  width: 100%;
+}
+
+.card-form button, .card-edit-form button {
+  grid-column: span 2;
+}

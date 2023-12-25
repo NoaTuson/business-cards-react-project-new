@@ -1,20 +1,35 @@
-import MyCard from "./Card";
+import React, { useState, useEffect } from 'react';
+import MyCard from './Card'; // Importing the Card component
 
-export default function Cards() {
-  const example = {
-    id: 1,
-    title: 'נגריית ים המלח',
-    createdTime: '2023-09-20 20:53:00',
-    imgUrl: 'https://www.היערהשחורגרמניה.com/wp-content/uploads/2016/03/chala-for-shabbat-3-1321701.jpg',
-    subtitle: 'חלות טעימות מאוד',
-    phone: '053-8989456456',
-    email: 'abcdef@gmail.com',
-  };
+const Cards = () => {
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    const fetchCards = async () => {
+      try {
+        const response = await fetch(`https://api.shipap.co.il/cards?token=TOKEN_HERE`, {
+          credentials: 'include',
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setCards(data);
+      } catch (error) {
+        console.error('Error fetching cards:', error);
+      }
+    };
+
+    fetchCards();
+  }, []);
 
   return (
     <div>
-        <h3 className="tempTitle">צפייה בכל הכרטיסים (דף ראשי)</h3>
-        <MyCard card={example} />
+      {cards.map(card => (
+        <MyCard key={card.id} card={card} />
+      ))}
     </div>
-  )
-}
+  );
+};
+
+export default Cards;
