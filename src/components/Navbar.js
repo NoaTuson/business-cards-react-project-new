@@ -16,6 +16,7 @@ import { Link, useNavigate, useResolvedPath } from 'react-router-dom';
 import { GeneralContext } from '../App';
 
 
+
 export const RoleTypes = {
 	none: 0,
 	user: 1,
@@ -28,7 +29,7 @@ export const checkPermissions = (permissions, userRoleType) => {
 }
 
 const pages = [
-	{ route: "/main", title: "Main Page" },
+	{ route: "/about", title: "About" },
 	{ route: "/login", title: "Login", permissions: [RoleTypes.none] },
 	{ route: "/signup", title: "Signup", permissions: [RoleTypes.none] },
 	{route: "/favorite", title: "Fav cards", permissions: [RoleTypes.user, RoleTypes.business, RoleTypes.admin],},
@@ -75,37 +76,43 @@ const logout = () => {
         handleCloseUserMenu();
     }
 
+	const [showCards, setShowCards] = useState(false);
+	const toggleCards = () => {
+		setShowCards(!showCards);
+	};
 
 	return (
 		<AppBar position="static" sx={{ bgcolor: "#3e374d", boxShadow: "none" }}>
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
-					<AdbIcon 
-						sx={{
-							display: { xs: "none", md: "flex" },
-							mr: 1,
-							fontSize: "3rem",
-						}}
-					/>
-					<Typography
-						variant="h6"
-						noWrap
-						component="a"
-						href="#app-bar-with-responsive-menu"
-						sx={{
-							mr: 2,
-							display: { xs: "none", md: "flex" },
-							fontFamily: "Roboto-Light",
-							fontWeight: 800,
-							fontSize: 25,
-							letterSpacing: ".1rem",
-							color: "inherit",
-							textDecoration: "none",
-							
-						}}
-					>
-						Bcards
-					</Typography>
+				<AdbIcon
+				onClick={toggleCards}
+				sx={{
+				display: { xs: 'none', md: 'flex' },
+				mr: 1,
+				fontSize: '3rem',
+				cursor: 'pointer', // Makes it clear the icon is clickable
+				}}
+			/>
+			<Typography
+				variant="h6"
+				noWrap
+				component="a"
+				href="#app-bar-with-responsive-menu"
+				sx={{
+				mr: 2,
+				display: { xs: 'none', md: 'flex' },
+				fontFamily: 'Roboto-Light',
+				fontWeight: 800,
+				fontSize: 25,
+				letterSpacing: '.1rem',
+				color: 'inherit',
+				textDecoration: 'none',
+				}}
+			>
+				Bcards
+			</Typography>
+
 
 					<Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
 						<IconButton

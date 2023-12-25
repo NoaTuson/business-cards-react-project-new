@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Checkbox, FormControlLabel } from '@mui/material';
+import { TextField, Button } from '@mui/material';
 import './MyCardsForm.css'; 
 
 // Define the initial state for the card form
