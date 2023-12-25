@@ -6,13 +6,13 @@ import Cards from './cards/Cards';
 import MyCards from './cards/MyCards';
 import FavCards from './cards/FavCards';
 import UsersMenagment from './admin/UsersMenagment';
-import About from './pages/About';
+import MainPage from './pages/MainPage';
 
 export default function Router() {
     return (
         <Routes>
             <Route path="/" element={<Cards />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/main" element={<MainPage />} />
             <Route path="/my-cards" element={<MyCards />} />
             <Route path="/favorite" element={<FavCards />} />
             <Route path="/admin" element={<UsersMenagment />} />

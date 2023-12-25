@@ -28,7 +28,7 @@ export const checkPermissions = (permissions, userRoleType) => {
 }
 
 const pages = [
-	{ route: "/about", title: "About" },
+	{ route: "/main", title: "Main Page" },
 	{ route: "/login", title: "Login", permissions: [RoleTypes.none] },
 	{ route: "/signup", title: "Signup", permissions: [RoleTypes.none] },
 	{route: "/favorite", title: "Fav cards", permissions: [RoleTypes.user, RoleTypes.business, RoleTypes.admin],},
