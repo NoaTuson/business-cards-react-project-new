@@ -1,0 +1,42 @@
+/* MyCardsForm.css */
+.card-form {
+  background-color: #a19cac;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.card-form .MuiFormControl-root {
+  margin-bottom: 20px;
+}
+
+.card-form-button {
+  margin-top: 10px;
+}
+
+.card-edit-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.card-edit-form .MuiFormControl-root {
+  margin-bottom: 20px;
+}
+
+.card-item {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-item h3 {
+  margin: 0 0 10px 0;
+}
+
+
