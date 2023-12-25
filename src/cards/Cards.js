@@ -7,7 +7,7 @@ const Cards = () => {
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const response = await fetch(`https://api.shipap.co.il/cards?token=TOKEN_HERE`, {
+        const response = await fetch(`https://api.shipap.co.il/cards?token=7cddfc3e-a309-11ee-beec-14dda9d4a5f0`, {
           credentials: 'include',
         });
         if (!response.ok) {
