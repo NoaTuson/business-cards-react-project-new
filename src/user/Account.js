@@ -68,7 +68,7 @@ export default function Account() {
 							<LockOutlinedIcon />
 						</Avatar>
 						<Typography component="h1" variant="h5">
-							Login
+							Edit user
 						</Typography>
 						<Box
 							component="form"
