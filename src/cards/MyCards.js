@@ -96,6 +96,7 @@ const MyCards = () => {
 
 	// Function to delete a card
 	const deleteCard = (cardId) => {
+		console.log("Deleting card with ID:", cardId)
 		fetch(
 			`https://api.shipap.co.il/business/cards/${cardId}?token=7cddfc3e-a309-11ee-beec-14dda9d4a5f0`,
 			{
@@ -103,9 +104,18 @@ const MyCards = () => {
 				credentials: "include",
 			}
 		)
-			.then(() => fetchCards())
-			.catch((err) => console.error("Error deleting card:", err));
-	};
+	.then((response) => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json(); // Assuming the server sends a JSON response
+    })
+    .then(() => {
+        console.log("Card deleted successfully, refreshing list...");
+        fetchCards();
+    })
+    .catch((err) => console.error("Error deleting card:", err));
+};
 
 	const renderCardForm = () => (
 		<form onSubmit={submitNewCard} className="card-form">
@@ -180,7 +190,6 @@ const MyCards = () => {
 			{cards.map((card) => (
 				<div key={card.id} className="card-item">
 					<h3>{card.title}</h3>
-					{/* Display other details as needed */}
 					<Button onClick={() => setEditingCard(card)}>Edit</Button>
 					<Button onClick={() => deleteCard(card.id)}>Delete</Button>
 				</div>

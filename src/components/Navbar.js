@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link, useNavigate, useResolvedPath } from "react-router-dom";
 import { GeneralContext } from "../App";
+import { ThemeContext } from "../App";
 
 export const RoleTypes = {
 	none: 0,
@@ -45,6 +46,7 @@ const pages = [
 ];
 
 function Navbar() {
+	const { theme, setTheme } = useContext(ThemeContext);
 	const [anchorElNav, setAnchorElNav] = useState(null);
 	const [anchorElUser, setAnchorElUser] = useState(null);
 	const { user, setUser, setLoader, userRoleType, setUserRoleType } =
@@ -66,6 +68,10 @@ function Navbar() {
 	const handleCloseUserMenu = () => {
 		setAnchorElUser(null);
 	};
+
+	 const toggleTheme = () => {
+        setTheme(theme === 'light' ? 'dark' : 'light');
+    };
 
 	const logout = () => {
 		setLoader(true);
@@ -212,7 +218,15 @@ function Navbar() {
 								</Link>
 							))}
 					</Box>
-
+				<button onClick={toggleTheme} 
+						sx={{
+							mr: 6,
+							fontFamily: "Roboto-Light",
+							fontWeight: 700,
+							letterSpacing: ".1rem",
+							color: "inherit",
+							textDecoration: "none",
+						}}>light / dark</button>
 					{user ? (
 						<Box sx={{ flexGrow: 0 }}>
 							<Tooltip title="Open settings">
@@ -256,6 +270,7 @@ function Navbar() {
 					) : (
 						""
 					)}
+
 				</Toolbar>
 			</Container>
 		</AppBar>

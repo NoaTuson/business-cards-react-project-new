@@ -273,8 +273,6 @@ export default function UsersManagement() {
         }
     };
 
-    // ... rest of your UsersManagement component
-
     if (isLoading) {
         return <div>Loading...</div>;
     }

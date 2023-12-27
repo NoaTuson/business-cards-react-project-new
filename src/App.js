@@ -6,11 +6,13 @@ import Loader from "./components/Loader";
 
 
 export const GeneralContext = createContext();
+export const ThemeContext = createContext();
 
 function App() {
 	const [user, setUser] = useState();
 	const [loader, setLoader] = useState(true);
 	const [userRoleType, setUserRoleType] = useState(RoleTypes.none);
+	 const [theme, setTheme] = useState('light');
 
 	useEffect(() => {
 		fetch(`https://api.shipap.co.il/clients/login`, {
@@ -45,9 +47,12 @@ function App() {
 		<GeneralContext.Provider
 			value={{ user, setUser, setLoader, userRoleType, setUserRoleType }}
 		>
+			<ThemeContext.Provider value={{ theme, setTheme }}>
+            <div className={theme}></div>
 			<Navbar />
 			<Router />
 			{loader && <Loader />}
+			</ThemeContext.Provider>
 		</GeneralContext.Provider>
 	);
 }

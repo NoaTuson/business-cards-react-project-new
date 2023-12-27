@@ -6,3 +6,15 @@ body {
 		src: url("fonts/Roboto-Light.ttf") format("truetype");
 	}
 }
+
+.light {
+    /* Light theme styles */
+    background-color: white;
+    color: black;
+}
+
+.dark {
+    /* Dark theme styles */
+    background-color: black;
+    color: white;
+}
