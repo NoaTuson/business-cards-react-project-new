@@ -10,9 +10,10 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import { Box } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 
-export default function MyCard({ card, onFavoriteChange }) {
+export default function MyCard({ card, onFavoriteChange, isAdmin }) {
 	const [isFavorite, setIsFavorite] = useState(card.favorite);
 	const [showSharePanel, setShowSharePanel] = useState(false);
 
@@ -92,6 +93,28 @@ export default function MyCard({ card, onFavoriteChange }) {
 		}
 	};
 
+
+	const deleteCard = () => {
+        fetch(`https://api.shipap.co.il/admin/cards/${card.id}?token=7cddfc3e-a309-11ee-beec-14dda9d4a5f0`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+
+            },
+            credentials: "include",
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+
+        })
+        .catch((error) => {
+            console.error("There has been a problem with deleting the card:", error);
+        });
+    };
+
+
 	return (
 		<Card sx={{ maxWidth: 345 }}>
 			<CardHeader
@@ -121,6 +144,11 @@ export default function MyCard({ card, onFavoriteChange }) {
 				<IconButton aria-label="share" onClick={toggleSharePanel}>
                     <ShareIcon />
                 </IconButton>
+                {isAdmin && (
+                    <IconButton aria-label="delete" onClick={deleteCard}>
+                        <DeleteIcon />
+                    </IconButton>
+                )}
             </CardActions>
             {showSharePanel && (
                 <Box>

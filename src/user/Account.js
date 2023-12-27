@@ -21,6 +21,7 @@ export default function Account() {
 	const navigate = useNavigate();
 	const { user, setUser, setLoader } = useContext(GeneralContext);
 
+	// eslint-disable-next-line no-unused-vars
 	const handleSubmit = (ev) => {
 		ev.preventDefault();
 		const obj = {};
@@ -58,84 +59,79 @@ export default function Account() {
   setLoader(false); // Ensure loader is turned off after fetch completes
 });
 
-	return (
-		<ThemeProvider theme={defaultTheme}>
-			{user ? (
-				<Container component="main" maxWidth="xs">
-					<CssBaseline />
-					<Box component="form"
-							onSubmit={handleSubmit}
-							noValidate
-						sx={{
-							marginTop: 8,
-							display: "flex",
-							flexDirection: "column",
-							alignItems: "center",
-						}}
+return (
+	<ThemeProvider theme={defaultTheme}>
+		{user ? (
+			<Container component="main" maxWidth="xs">
+				<CssBaseline />
+				<Box
+					component="form"
+					onSubmit={handleSubmit} // Correctly applying handleSubmit here
+					noValidate
+					sx={{
+						marginTop: 8,
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+					}}
+				>
+					<Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+						<LockOutlinedIcon />
+					</Avatar>
+					<Typography component="h1" variant="h5">
+						Edit user
+					</Typography>
+					<Grid container spacing={2}>
+					{clientStructure
+					.filter((s) => !s.initialOnly)
+					.map((s) => (
+						<Grid key={s.name} item xs={12} sm={s.block ? 12 : 6}>
+							{s.type === "boolean" ? (
+								<FormControlLabel
+									control={
+										<Switch
+											color="primary"
+											name={s.name}
+											checked={user[s.name]}
+										/>
+									}
+									label={s.label}
+									labelPlacement="start"
+								/>
+							) : (
+								<TextField
+									margin="normal"
+									required={s.required}
+									fullWidth
+									id={s.name}
+									label={s.label}
+									name={s.name}
+									type={s.type}
+									autoComplete={s.name}
+									value={user[s.name]}
+									onChange={(ev) =>
+										setUser({ ...user, [s.name]: ev.target.value })
+									}
+								/>
+							)}
+						</Grid>
+					))}
+					</Grid>
+					<Button
+						type="submit"
+						fullWidth
+						variant="contained"
+						sx={{ mt: 3, mb: 2 }}
 					>
-						<Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-							<LockOutlinedIcon />
-						</Avatar>
-						<Typography component="h1" variant="h5">
-							Edit user
-						</Typography>
-						<Box
-							component="form"
-							onSubmit={handleSubmit}
-							noValidate
-							sx={{ mt: 1 }}
-						>
-							<Grid container spacing={2}>
-								{clientStructure
-									.filter((s) => !s.initialOnly)
-									.map((s) => (
-										<Grid key={s.name} item xs={12} sm={s.block ? 12 : 6}>
-											{s.type === "boolean" ? (
-												<FormControlLabel
-													control={
-														<Switch
-															color="primary"
-															name={s.name}
-															checked={user[s.name]}
-														/>
-													}
-													label={s.label}
-													labelPlacement="start"
-												/>
-											) : (
-												<TextField
-													margin="normal"
-													required={s.required}
-													fullWidth
-													id={s.name}
-													label={s.label}
-													name={s.name}
-													type={s.type}
-													autoComplete={s.name}
-													value={user[s.name]}
-													onChange={(ev) =>
-														setUser({ ...user, [s.name]: ev.target.value })
-													}
-												/>
-											)}
-										</Grid>
-									))}
-							</Grid>
-							<Button
-								type="submit"
-								fullWidth
-								variant="contained"
-								sx={{ mt: 3, mb: 2 }}
-							>
-								Save
-							</Button>
-						</Box>
-					</Box>
-				</Container>
-			) : (
-				""
-			)}
-			<br /> <br /> <br /> <br />
-		</ThemeProvider>
-	);
+						Save
+					</Button>
+				</Box>
+			</Container>
+		) : (
+			""
+		)}
+		<br /> <br /> <br /> <br />
+	</ThemeProvider>
+);
+
 }}
