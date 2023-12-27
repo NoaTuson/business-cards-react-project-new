@@ -7,13 +7,30 @@ import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
+import { Box } from "@mui/material";
+
 
 export default function MyCard({ card, onFavoriteChange }) {
 	const [isFavorite, setIsFavorite] = useState(card.favorite);
+	const [showSharePanel, setShowSharePanel] = useState(false);
 
+	const toggleSharePanel = () => {
+        setShowSharePanel(!showSharePanel);
+    };
+
+	const shareOnWhatsApp = `https://wa.me/?text=${encodeURIComponent(card.title + ' ' + card.imgUrl)}`;
+    const shareOnMail = `mailto:?subject=${encodeURIComponent(card.title)}&body=${encodeURIComponent(card.description + ' ' + card.imgUrl)}`;
+    const shareTextMessage = `sms:?&body=${encodeURIComponent(card.title + ' ' + card.imgUrl)}`;
+
+    const copyLinkToClipboard = () => {
+        navigator.clipboard.writeText(card.imgUrl).then(() => {
+            alert('Link copied to clipboard');
+        }, (err) => {
+            console.error('Could not copy text: ', err);
+        });
+    };
 	const addFavorite = () => {
 		fetch(
 			`https://api.shipap.co.il/cards/${card.id}/favorite?token=7cddfc3e-a309-11ee-beec-14dda9d4a5f0`,
@@ -101,10 +118,18 @@ export default function MyCard({ card, onFavoriteChange }) {
 				<IconButton aria-label="add to favorites" onClick={toggleFavorite}>
 					<FavoriteIcon color={isFavorite ? "error" : "action"} />
 				</IconButton>
-				<IconButton aria-label="share">
-					<ShareIcon />
-				</IconButton>
-			</CardActions>
-		</Card>
+				<IconButton aria-label="share" onClick={toggleSharePanel}>
+                    <ShareIcon />
+                </IconButton>
+            </CardActions>
+            {showSharePanel && (
+                <Box>
+                    <a href={shareOnWhatsApp} target="_blank" rel="noopener noreferrer">Share on WhatsApp</a><br />
+                    <a href={shareOnMail}>Share via Email</a><br />
+                    <a href={shareTextMessage}>Share via SMS</a><br />
+                    <button onClick={copyLinkToClipboard}>Copy Link</button>
+                </Box>
+            )}
+        </Card>
 	);
 }

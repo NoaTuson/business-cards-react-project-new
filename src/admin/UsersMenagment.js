@@ -17,21 +17,21 @@ const defaultTheme = createTheme();
 
 // Define your client structure with the fields you need
 const clientStructure = [
-  { label: 'First Name', name: 'firstName', required: true },
-  { label: 'Middle Name', name: 'middleName', required: false },
-  { label: 'Last Name', name: 'lastName', required: true },
-  { label: 'Phone', name: 'phone', required: true },
-  { label: 'Email', name: 'email', required: true },
-  { label: 'Img Url', name: 'imgUrl', required: false },
-  { label: 'Img Alt', name: 'imgAlt', required: false },
-  { label: 'State', name: 'state', required: false },
-  { label: 'Country', name: 'country', required: true },
-  { label: 'City', name: 'city', required: true },
-  { label: 'Street', name: 'street', required: false },
-  { label: 'House Number', name: 'houseNumber', required: false },
-  { label: 'Zip', name: 'zip', required: false },
-  { label: 'Business', name: 'business', type: 'boolean', required: false },
-];
+    { label: 'First Name', name: 'firstName', required: true },
+    { label: 'Middle Name', name: 'middleName', required: false },
+    { label: 'Last Name', name: 'lastName', required: true },
+    { label: 'Phone', name: 'phone', required: true },
+    { label: 'Email', name: 'email', required: true },
+    { label: 'Img Url', name: 'imgUrl', required: false },
+    { label: 'Img Alt', name: 'imgAlt', required: false },
+    { label: 'State', name: 'state', required: false },
+    { label: 'Country', name: 'country', required: true },
+    { label: 'City', name: 'city', required: true },
+    { label: 'Street', name: 'street', required: false },
+    { label: 'House Number', name: 'houseNumber', required: false },
+    { label: 'Zip', name: 'zip', required: false },
+    { label: 'Business', name: 'business', type: 'boolean', required: false },
+    ];
 
 const ClientTable = ({ clients, onSelectClient, onEditClient, onDeleteClient }) => {
     return (
@@ -181,7 +181,7 @@ const handleSubmit = async (e) => {
 };
 
 export default function UsersManagement() {
-  const [clients, setClients] = useState([]);
+    const [clients, setClients] = useState([]);
     const [cards, setCards] = useState([]);
     const [selectedClient, setSelectedClient] = useState(null);
     const [editClient, setEditClient] = useState(null);
@@ -207,7 +207,7 @@ export default function UsersManagement() {
     };
 
 
- useEffect(() => {
+    useEffect(() => {
         const fetchClients = async () => {
             setIsLoading(true);
             setError(null);
