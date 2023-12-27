@@ -79,7 +79,7 @@ export default function MyCard({ card, onFavoriteChange }) {
 		<Card sx={{ maxWidth: 345 }}>
 			<CardHeader
 				avatar={
-					<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+					<Avatar sx={{ bgcolor: '#6d667a' }} aria-label="recipe">
 						{card.title[0]}
 					</Avatar>
 				}

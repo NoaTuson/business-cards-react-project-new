@@ -3,6 +3,8 @@ import "./App.css";
 import Router from "./Router";
 import Navbar, { RoleTypes } from "./components/Navbar";
 import Loader from "./components/Loader";
+import { Route, Navigate } from 'react-router-dom';
+import Cards from "./cards/Cards";
 
 export const GeneralContext = createContext();
 
@@ -44,6 +46,8 @@ function App() {
 		<GeneralContext.Provider
 			value={{ user, setUser, setLoader, userRoleType, setUserRoleType }}
 		>
+			<Route path="/" element={<Navigate replace to="/main" />} />
+    <Route path="/main" element={<Cards />} />
 			<Navbar />
 			<Router />
 			{loader && <Loader />}

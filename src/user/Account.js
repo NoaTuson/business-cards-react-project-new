@@ -45,11 +45,18 @@ export default function Account() {
 				method: "PUT",
 				headers: { "Content-type": "application/json" },
 				body: JSON.stringify(obj),
-			}
-		).then(() => {
-			setLoader(false);
-		});
-	};
+			})
+.then(response => response.json()) // or response.text() if the response is not JSON
+.then(data => {
+  console.log('Success:', data);
+ navigate("/main"); // Redirecting to another route after successful update
+})
+.catch((error) => {
+  console.error('Error:', error);
+})
+.finally(() => {
+  setLoader(false); // Ensure loader is turned off after fetch completes
+});
 
 	return (
 		<ThemeProvider theme={defaultTheme}>
@@ -129,4 +136,4 @@ export default function Account() {
 			<br /> <br /> <br /> <br />
 		</ThemeProvider>
 	);
-}
+}}
