@@ -294,6 +294,9 @@ export default function UsersManagement() {
             />
             {selectedClient && <ClientDetails client={selectedClient} />}
             {editClient && <EditClientForm client={editClient} onClientUpdated={() => fetchClients()} />}
+
+            <h3> Edit Cards </h3>
+                <MyCards />
         </div>
     );
 }
