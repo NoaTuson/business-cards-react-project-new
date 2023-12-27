@@ -1,0 +1,41 @@
+    .card-form-container {
+    /* Styling for form container */
+    }
+
+    .card-form {
+    /* Styling for form element */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    /* Add more styling here */
+    }
+
+    .form-input {
+    /* Styling for inputs */
+    }
+
+    .form-actions {
+    /* Styling for form action buttons */
+    display: flex;
+    justify-content: space-between;
+    }
+
+    .cards-display {
+    /* Styling for card display area */
+    }
+
+    .card-item {
+    /* Styling for each card */
+    }
+
+    .card-details {
+    /* Styling for card details */
+    }
+
+    .card-actions {
+    /* Styling for edit/delete buttons */
+    }
+
+    .cancel-button, .submit-button {
+    /* Styling for cancel and submit buttons */
+    }

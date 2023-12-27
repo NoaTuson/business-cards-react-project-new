@@ -12,7 +12,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import { FormControlLabel } from "@mui/material";
 import { GeneralContext } from "../App"; 
-
+import MyCards from '../cards/MyCards';
 const defaultTheme = createTheme();
 
 // Define your client structure with the fields you need
@@ -181,8 +181,8 @@ const handleSubmit = async (e) => {
 };
 
 export default function UsersManagement() {
-const [clients, setClients] = useState([]);
-    const [, setCards] = useState([]);
+  const [clients, setClients] = useState([]);
+    const [cards, setCards] = useState([]);
     const [selectedClient, setSelectedClient] = useState(null);
     const [editClient, setEditClient] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
