@@ -11,6 +11,7 @@ import About from "./pages/About";
 export default function Router() {
 	return (
 		<Routes>
+			<Route path="/" element={<Cards />} />
 			<Route path="/main" element={<Cards />} />
 			<Route path="/about" element={<About />} />
 			<Route path="/my-cards" element={<MyCards />} />

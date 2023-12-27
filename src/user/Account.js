@@ -63,7 +63,9 @@ export default function Account() {
 			{user ? (
 				<Container component="main" maxWidth="xs">
 					<CssBaseline />
-					<Box
+					<Box component="form"
+							onSubmit={handleSubmit}
+							noValidate
 						sx={{
 							marginTop: 8,
 							display: "flex",

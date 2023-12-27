@@ -182,7 +182,7 @@ const handleSubmit = async (e) => {
 
 export default function UsersManagement() {
     const [clients, setClients] = useState([]);
-    const [cards, setCards] = useState([]);
+    const [setCards] = useState([]);
     const [selectedClient, setSelectedClient] = useState(null);
     const [editClient, setEditClient] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -243,7 +243,7 @@ export default function UsersManagement() {
 
         fetchClients();
         fetchCards();
-    }, []);
+    });
 
     const handleClientSelect = (client) => {
         setSelectedClient(client);
