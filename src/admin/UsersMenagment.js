@@ -243,7 +243,6 @@ const renderCardsList = () => (
             <div key={card.id} className="card-item">
                 <span>{card.title}</span>
                 <div className="card-actions">
-                    <button onClick={() => renderUserCards(card.id)}>View</button>
                     <button onClick={() => renderEditForm(card)}>Edit</button>
                     <button onClick={() => deleteCard(card.id)}>Delete</button>
                 </div>

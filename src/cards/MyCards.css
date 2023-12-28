@@ -1,41 +1,60 @@
-    .card-form-container {
-    /* Styling for form container */
-    }
+/* MyCardsForm.css */
+.card-form {
+	background-color: #a19cac;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	margin-bottom: 20px;
+}
 
-    .card-form {
-    /* Styling for form element */
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    /* Add more styling here */
-    }
+.card-form .MuiFormControl-root {
+	margin-bottom: 20px;
+}
 
-    .form-input {
-    /* Styling for inputs */
-    }
+.card-form-button {
+	margin-top: 10px;
+}
 
-    .form-actions {
-    /* Styling for form action buttons */
-    display: flex;
-    justify-content: space-between;
-    }
+.card-edit-form {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	margin-bottom: 20px;
+}
 
-    .cards-display {
-    /* Styling for card display area */
-    }
+.card-edit-form .MuiFormControl-root {
+	margin-bottom: 20px;
+}
 
-    .card-item {
-    /* Styling for each card */
-    }
+.card-item {
+	background-color: #f9f9f9;
+	padding: 10px;
+	border-radius: 4px;
+	margin-bottom: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-    .card-details {
-    /* Styling for card details */
-    }
+.card-item h3 {
+	margin: 0 0 10px 0;
+}
 
-    .card-actions {
-    /* Styling for edit/delete buttons */
-    }
+.card-form,
+.card-edit-form {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 16px;
+	margin-bottom: 24px;
+}
 
-    .cancel-button, .submit-button {
-    /* Styling for cancel and submit buttons */
-    }
+.card-form input,
+.card-form .MuiFormControl-root,
+.card-edit-form input,
+.card-edit-form .MuiFormControl-root {
+	width: 100%;
+}
+
+.card-form button,
+.card-edit-form button {
+	grid-column: span 2;
+}
