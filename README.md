@@ -27,9 +27,23 @@ git clone https://github.com/NoaTuson/business-cards-react-project-new.git
 cd business-cards-react-project-new
 npm install
 
+```
 After installing the dependencies, you can start the application by running:
 
 ```bash
 npm start
 
-This will launch the application on localhost:3000.
+```
+This will launch the application on `localhost:3000`.
+
+
+## Users 
+
+- Login Admin- noatu1999@gmail.com password 2029
+- Business users
+- nish1@nish1.com password 12345
+- dol@dol.com password 12345
+- Regular users
+- shani@shani.com password 12345
+- ronen@ronen.com password 12345
+
