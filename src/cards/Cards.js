@@ -30,9 +30,11 @@ const Cards = () => {
 	return (
 		<div>
 			<h2 className="tempTitle">All Business Cards</h2>
+			 <div className="cards-container">
 			{cards.map((card) => (
 				<MyCard key={card.id} card={card} />
 			))}
+		</div>
 		</div>
 	);
 };

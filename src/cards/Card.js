@@ -10,7 +10,6 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import { Box } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
 import "../index.css";
 
 
@@ -23,7 +22,7 @@ export default function MyCard({ card, onFavoriteChange, isAdmin }) {
     };
 
 	const shareOnWhatsApp = `https://wa.me/?text=${encodeURIComponent(card.title + ' ' + card.imgUrl)}`;
-    const shareOnMail = `mailto:?subject=${encodeURIComponent(card.title)}&body=${encodeURIComponent(card.description + ' ' + card.imgUrl)}`;
+    const shareOnMail = `https://mail.google.com/?subject=${encodeURIComponent(card.title)}&body=${encodeURIComponent(card.description + ' ' + card.imgUrl)}`;
     const shareTextMessage = `sms:?&body=${encodeURIComponent(card.title + ' ' + card.imgUrl)}`;
 
     const copyLinkToClipboard = () => {
@@ -95,32 +94,12 @@ export default function MyCard({ card, onFavoriteChange, isAdmin }) {
 	};
 
 
-	const deleteCard = () => {
-        fetch(`https://api.shipap.co.il/admin/cards/${card.id}?token=7cddfc3e-a309-11ee-beec-14dda9d4a5f0`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-
-            },
-            credentials: "include",
-        })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-
-        })
-        .catch((error) => {
-            console.error("There has been a problem with deleting the card:", error);
-        });
-    };
-
 
 	return (
-		<Card sx={{ maxWidth: 345 }}>
+		<Card  className="card-root" sx={{ maxWidth: 345 }}>
 			<CardHeader
 				avatar={
-					<Avatar sx={{ bgcolor: '#6d667a' }} aria-label="recipe">
+					<Avatar  aria-label="recipe">
 						{card.title[0]}
 					</Avatar>
 				}
@@ -133,23 +112,18 @@ export default function MyCard({ card, onFavoriteChange, isAdmin }) {
 				image={card.imgUrl}
 				alt={card.imgAlt}
 			/>
-			<CardContent>
+			<CardContent className="card-content">
 				<Typography variant="body2" color="text.secondary">
 					{card.description}
 				</Typography>
 			</CardContent>
-			<CardActions disableSpacing>
+			<CardActions  className="card-actions" disableSpacing>
 				<IconButton aria-label="add to favorites" onClick={toggleFavorite}>
 					<FavoriteIcon color={isFavorite ? "error" : "action"} />
 				</IconButton>
-				<IconButton aria-label="share" onClick={toggleSharePanel}>
+				<IconButton aria-label="share" className="card-actions" onClick={toggleSharePanel}>
                     <ShareIcon />
                 </IconButton>
-                {isAdmin && (
-                    <IconButton aria-label="delete" onClick={deleteCard}>
-                        <DeleteIcon />
-                    </IconButton>
-                )}
             </CardActions>
             {showSharePanel && (
                 <Box>
