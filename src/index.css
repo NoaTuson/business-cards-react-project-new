@@ -72,6 +72,7 @@ h3 {
 
 .card-root {
     max-width: 350px;
+    height: inherit;
     display: flex;
     flex-direction: column;
     background-color: var(--card-item-background-color);
@@ -225,8 +226,12 @@ a {
     gap: 20px;
     padding: 20px;
     justify-content: center;
+    align-items: start; /* Aligns items to the start on the cross axis */
+    justify-items: center; /* Centers items on the main axis */
+    height: calc(100vh - 40px); /* Full height minus padding */
+    margin: auto;
+    max-width: 1200px; /* Maximum width of the grid */
 }
-
 
 /* Responsive design: Adjusting grid for different screen sizes */
 @media (max-width: 1200px) {
@@ -244,5 +249,6 @@ a {
 @media (max-width: 480px) {
     .cards-container {
         grid-template-columns: 1fr;
+        padding: 20px 0; /* Remove horizontal padding on smaller screens */
     }
 }
