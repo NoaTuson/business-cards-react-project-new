@@ -1,8 +1,27 @@
     import React, { useState, useEffect } from 'react';
 
+    	const initialCardState = {
+	title: "",
+	description: "",
+	subtitle: "",
+	phone: "",
+	email: "",
+	web: "",
+	imgUrl: "",
+	imgAlt: "",
+	state: "",
+	country: "",
+	city: "",
+	street: "",
+	houseNumber: 0,
+	zip: "",
+	};
+
     const UsersManagement = () => {
     const [users, setUsers] = useState([]);
     const [cards, setCards] = useState([]);
+    const [setNewCard] = useState(initialCardState);
+    const [editingCard, setEditingCard] = useState(null);
     const [selectedUser, setSelectedUser] = useState(null);
     const [selectedUserCards, setSelectedUserCards] = useState([]);
     const apiToken = '7cddfc3e-a309-11ee-beec-14dda9d4a5f0';
@@ -100,28 +119,55 @@ const viewUser = (userId) => {
     });
 };
 
-const editCard = (cardId, cardData) => {
-    fetch(`https://api.shipap.co.il/admin/cards/${cardId}?token=${apiToken}`, {
-        method: 'PUT',
+
+const editCard = (event) => {
+    event.preventDefault();
+
+    fetch(`https://api.shipap.co.il/admin/cards/${editingCard.id}?token=${apiToken}`, {
         credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(cardData),
+        method: 'PUT',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(editingCard),
     })
     .then(response => {
+        console.log("Raw response:", response); // Debugging: Log raw response
+
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        return response.json();
+
+        // Check if the response has content before parsing as JSON
+        return response.text().then(text => text ? JSON.parse(text) : {});
     })
-    .then(() => {
-        if (selectedUser) {
-        viewUserCards(selectedUser.id);
-    }
+    .then(data => {
+        console.log("Response data:", data); // Debugging: Log response data
+
+        fetchAllCards();
+        setEditingCard(null);
     })
     .catch(error => {
-        console.error('Error updating card:', error);
+        console.error("Error updating card:", error);
     });
 };
+
+
+const handleInputChange = (event, isEditing = false) => {
+	const { name, value } = event.target;
+	if (isEditing) {
+		// Update editingCard state for edits
+		setEditingCard((prevCard) => ({
+		...prevCard,
+		[name]: value
+		}));
+	} else {
+		// Update newCard state for new entries
+		setNewCard((prevCard) => ({
+		...prevCard,
+		[name]: value
+		}));
+	}
+	};
+
 
 const deleteCard = (cardId) => {
     fetch(`https://api.shipap.co.il/admin/cards/${cardId}?token=${apiToken}`, {
@@ -184,21 +230,48 @@ const deleteCard = (cardId) => {
         </div>
     );
 
-        const renderCardsList = () => (
+const renderCardsList = () => (
     <div className="cards-list">
         {cards.map(card => (
-        <div key={card.id} className="card-item">
-            <span>{card.title}</span> {/* Assuming 'title' is the correct property for card title */}
-            {/* Include other card details here if needed */}
-            <div className="card-actions">
-            <button onClick={() => renderUserCards(card.id)}>View</button>
-            <button onClick={() => editCard(card)}>Edit</button>
-            <button onClick={() => deleteCard(card.id)}>Delete</button>
+            <div key={card.id} className="card-item">
+                <span>{card.title}</span>
+                <div className="card-actions">
+                    <button onClick={() => renderUserCards(card.id)}>View</button>
+                    <button onClick={() => renderEditForm(card)}>Edit</button>
+                    <button onClick={() => deleteCard(card.id)}>Delete</button>
+                </div>
             </div>
-        </div>
         ))}
+        {editingCard && renderEditFormUI()}
     </div>
+);
+
+
+const renderEditForm = (card) => {
+    setEditingCard(card);
+};
+
+const renderEditFormUI = () => {
+    if (!editingCard) return null;
+
+    return (
+        <form onSubmit={editCard} className="card-edit-form">
+            {Object.entries(initialCardState).map(([key]) => (
+                <input
+                    key={key}
+                    type={key === 'email' ? 'email' : key === 'phone' ? 'tel' : 'text'}
+                    name={key}
+                    value={editingCard[key]}
+                    onChange={(event) => handleInputChange(event, true)}
+                    placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
+                    required={key !== 'imgUrl' && key !== 'imgAlt' && key !== 'state' && key !== 'zip'}
+                />
+            ))}
+            <button type="submit">Save Changes</button>
+            <button type="button" onClick={() => setEditingCard(null)}>Cancel</button>
+        </form>
     );
+};
 
     return (
         <div className="users-management">

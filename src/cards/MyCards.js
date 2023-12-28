@@ -80,6 +80,7 @@
 		});
 	};
 
+	
 	const deleteCard = (cardId) => {
 		fetch(`https://api.shipap.co.il/business/cards/${cardId}?token=${apiToken}`, {
 		credentials: 'include',
@@ -129,6 +130,8 @@
 		))}
 		</div>
 	);
+
+
 	const renderEditForm = () => {
 	if (!editingCard) return null;
 	return (
