@@ -1,6 +1,6 @@
     import React, { useState, useEffect } from 'react';
 
-    	const initialCardState = {
+    const initialCardState = {
 	title: "",
 	description: "",
 	subtitle: "",
@@ -123,7 +123,7 @@ const viewUser = (userId) => {
 const editCard = (event) => {
     event.preventDefault();
 
-    fetch(`https://api.shipap.co.il/admin/cards/${editingCard.id}?token=${apiToken}`, {
+    fetch(`https://api.shipap.co.il/business/cards/${editingCard.id}?token=${apiToken}`, {
         credentials: 'include',
         method: 'PUT',
         headers: { 'Content-type': 'application/json' },
@@ -174,22 +174,29 @@ const deleteCard = (cardId) => {
         method: 'DELETE',
         credentials: 'include',
     })
-.then(response => {
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json(); 
-})
-.then(() => {
+    .then(response => {
+        console.log("Raw response:", response); // Debugging: Log raw response
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        // Check if the response has content before parsing as JSON
+        return response.text().then(text => text ? JSON.parse(text) : {});
+    })
+    .then(data => {
+        console.log("Response data:", data); // Debugging: Log response data
+
         if (selectedUser) {
-        viewUserCards(selectedUser.id);
-    }
-    fetchAllCards(); 
-})
+            viewUserCards(selectedUser.id);
+        }
+        fetchAllCards(); 
+    })
     .catch(error => {
         console.error('Error deleting card:', error);
     });
 };
+
 
     const renderUsersList = () => (
         <div className="users-list">
