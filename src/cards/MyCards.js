@@ -1,5 +1,4 @@
 	import React, { useState, useEffect } from 'react';
-	import './MyCards.css';
 	import "../index.css";
 
 	const initialCardState = {
