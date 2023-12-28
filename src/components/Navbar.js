@@ -11,9 +11,10 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
+import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import { Link, useNavigate, useResolvedPath } from "react-router-dom";
 import { GeneralContext } from "../App";
+import Brightness4Icon from '@mui/icons-material/Brightness4';
 
 
 export const RoleTypes = {
@@ -47,6 +48,7 @@ const pages = [
 
 function Navbar() {
 	const [anchorElNav, setAnchorElNav] = useState(null);
+		const [theme, setTheme] = useState('light');
 	const [anchorElUser, setAnchorElUser] = useState(null);
 	const { user, setUser, setLoader, userRoleType, setUserRoleType } =
 		useContext(GeneralContext);
@@ -68,6 +70,12 @@ function Navbar() {
 		setAnchorElUser(null);
 	};
 
+	const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+};
+
 
 	const logout = () => {
 		setLoader(true);
@@ -88,7 +96,7 @@ function Navbar() {
 		<AppBar position="static" sx={{ bgcolor: "#3e374d", boxShadow: "none" }}>
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
-					<AdbIcon
+					<RecentActorsIcon
 						sx={{
 							display: { xs: "none", md: "flex" },
 							mr: 1,
@@ -162,7 +170,7 @@ function Navbar() {
 								))}
 						</Menu>
 					</Box>
-					<AdbIcon
+					<RecentActorsIcon
 						sx={{
 							display: { xs: "flex", md: "none" },
 							mr: 1,
@@ -187,6 +195,8 @@ function Navbar() {
 					>
 						Bcards
 					</Typography>
+<Brightness4Icon  onClick={toggleTheme} ></Brightness4Icon>
+					
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
 						{pages
 							.filter(
@@ -200,6 +210,7 @@ function Navbar() {
 									to={p.route}
 									style={{ textDecoration: "none", color: "white" }}
 								>
+								
 									<Button
 										onClick={handleCloseNavMenu}
 										sx={{
@@ -211,9 +222,11 @@ function Navbar() {
 									>
 										{p.title}
 									</Button>
+									
 								</Link>
 							))}
 					</Box>
+					
 					{user ? (
 						<Box sx={{ flexGrow: 0 }}>
 							<Tooltip title="Open settings">

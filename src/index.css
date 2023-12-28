@@ -1,26 +1,21 @@
+    :root {
+    --background-color: #d7d7eb;
+    --text-color: #000;
+    @font-face {
+    font-family: "Roboto-Light";
+    src: url("fonts/Roboto-Light.ttf") format("truetype");
+    }
+    }
 
-[data-theme="dark"] {
-body {
-	margin: 0;
-	background-color: #6227d1;
-	@font-face {
-		font-family: "Roboto-Light";
-		src: url("fonts/Roboto-Light.ttf") format("truetype");
-        color: 'inherit';
-	}
-}
-}
+    [data-theme="dark"] {
+    --background-color: #68607a;
+    --text-color: #fff;
+    }
 
+    body {
+    margin: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: var(--font-family), sans-serif;
+    }
 
-[data-theme="light"] {
-body {
-	margin: 0;
-background-color: #8d3535;
-    color: #000;
-	@font-face {
-		font-family: "Roboto-Light";
-		src: url("fonts/Roboto-Light.ttf") format("truetype");
-
-	}}
-
-}
