@@ -165,7 +165,7 @@ export default function Signup() {
 						<LockOutlinedIcon />
 					</Avatar>
 					<Typography component="h1" variant="h5">
-						Login
+						Sign Up
 					</Typography>
 					<Box
 						component="form"
