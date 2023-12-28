@@ -28,6 +28,7 @@ const Cards = () => {
 
 	return (
 		<div>
+			<h2 className="tempTitle">All Business Cards</h2>
 			{cards.map((card) => (
 				<MyCard key={card.id} card={card} />
 			))}

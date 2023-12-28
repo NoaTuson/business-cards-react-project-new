@@ -6,10 +6,11 @@ import Container from "@mui/material/Container";
 
 function Footer() {
 	return (
-		<AppBar
-			position="static"
-			maxWidth="200px"
-			sx={{ bgcolor: "#3e374d", boxShadow: "none" }}
+		<AppBar 
+			position="fixed"
+            style={{ top: 'auto', bottom: 0 }}
+            maxWidth="200px"
+            sx={{ bgcolor: "#3e374d", boxShadow: "none" }}
 		>
 			<div
 				class="container p-4"
@@ -30,7 +31,7 @@ function Footer() {
 				{"  "}
 			</div>
 
-			<Container
+			<Container 
 				maxWidth="xl"
 				sx={{
 					display: "flex",

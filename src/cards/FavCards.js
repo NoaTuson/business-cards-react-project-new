@@ -33,7 +33,7 @@ export default function FavCards() {
 
 	return (
 		<div>
-			<h3 className="tempTitle">Favorite Cards</h3>
+			<h2 className="tempTitle">Favorite Cards</h2>
 			<div>
 				{favCards.map((card) => (
 					<Card

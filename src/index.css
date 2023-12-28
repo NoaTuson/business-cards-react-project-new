@@ -5,6 +5,22 @@
     font-family: "Roboto-Light";
     src: url("fonts/Roboto-Light.ttf") format("truetype");
     }
+
+    h3{
+        margin: 3rem;
+        font-size: 20px;
+    }
+        h1, h2{
+        margin: 1rem;
+        font-size: 40px;
+        font-weight: bolder;
+        font-style: italic;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    
     }
 
     [data-theme="dark"] {
