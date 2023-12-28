@@ -71,7 +71,7 @@ h3 {
 }
 
 .card-root {
-    max-width: 345px;
+    max-width: 350px;
     display: flex;
     flex-direction: column;
     background-color: var(--card-item-background-color);
@@ -84,7 +84,7 @@ h3 {
 
 
 .card-header {
-    background-color: var(--navbar-background-color);
+    background-color: var(--card-item-background-color);
     color: var(--navbar-text-color);
     padding: 10px;
     border-bottom: 1px solid #d3d3d3; /* Subtle border for separation */
@@ -102,7 +102,7 @@ h3 {
 }
 
 .card-media {
-    height: 194px; /* Height already specified */
+    height: 450px; /* Height already specified */
     object-fit: cover; /* Ensures image covers the area properly */
 }
 
@@ -117,9 +117,8 @@ h3 {
 }
 
 .card-actions {
-    background-color: var(--footer-background-color);
+    background-color: var(--card-item-background-color);
     color: var(--footer-text-color);
-    padding: 10px;
     display: flex;
     justify-content: space-between;
     border-top: 1px solid #d3d3d3; /* Subtle border for separation */
@@ -129,13 +128,13 @@ h3 {
 .share-panel {
     background-color: var(--form-background-color);
     color: var(--form-text-color);
-    padding: 10px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Align links to the start */
-    gap: 5px; /* Space between items */
+    align-items: center;
+    padding: 12px;
     border-top: 1px solid #d3d3d3; /* Subtle border for separation */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    
 }
 
 .card-form, .card-edit-form {
@@ -165,7 +164,17 @@ h3 {
     border: 1px solid #677086;
 }
 
-.card-form button, .card-edit-form button {
+ .share-panel button{
+    width: 150px;
+    height: 30px;
+background-color: var(--button-background-color);
+    color: var(--button-text-color);
+    font-family: "Roboto-Light";
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 7px;
+}
+
+.card-form button, .card-edit-form button{
     background-color: var(--button-background-color);
     color: var(--button-text-color);
     font-family: "Roboto-Light";
@@ -178,7 +187,7 @@ h3 {
 }
 
 .card-form button:hover,
-.card-edit-form button:hover {
+.card-edit-form button:hover, button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
@@ -200,8 +209,6 @@ h3 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
-
 .tempTitle {
     text-align: center;
     margin-bottom: 20px;
@@ -213,6 +220,12 @@ h3 {
     gap: 20px;
     padding: 20px;
     justify-content: center;
+}
+
+a {
+    font-family: "Roboto-Light";
+    font-style: none;
+    color: var(--button-text-color);
 }
 
 /* Responsive design: Adjusting grid for different screen sizes */

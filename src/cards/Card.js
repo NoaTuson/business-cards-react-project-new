@@ -97,16 +97,16 @@ export default function MyCard({ card, onFavoriteChange, isAdmin }) {
 
 	return (
 		<Card  className="card-root" sx={{ maxWidth: 345 }}>
-			<CardHeader
+			<CardHeader  className="card-header" 
 				avatar={
-					<Avatar  aria-label="recipe">
+					<Avatar className="card-avatar" aria-label="recipe">
 						{card.title[0]}
 					</Avatar>
 				}
 				title={card.title}
 				subheader={card.createdTime}
 			/>
-			<CardMedia
+			<CardMedia className="card-media"
 				component="img"
 				height="194"
 				image={card.imgUrl}
@@ -121,15 +121,15 @@ export default function MyCard({ card, onFavoriteChange, isAdmin }) {
 				<IconButton aria-label="add to favorites" onClick={toggleFavorite}>
 					<FavoriteIcon color={isFavorite ? "error" : "action"} />
 				</IconButton>
-				<IconButton aria-label="share" className="card-actions" onClick={toggleSharePanel}>
+				<IconButton aria-label="share" onClick={toggleSharePanel}>
                     <ShareIcon />
                 </IconButton>
             </CardActions>
             {showSharePanel && (
-                <Box>
-                    <a href={shareOnWhatsApp} target="_blank" rel="noopener noreferrer">Share on WhatsApp</a><br />
-                    <a href={shareOnMail}>Share via Email</a><br />
-                    <a href={shareTextMessage}>Share via SMS</a><br />
+                <Box className="share-panel">
+                    <button href={shareOnWhatsApp} target="_blank" rel="noopener noreferrer">Share on WhatsApp</button><br />
+                    <button href={shareOnMail}>Share via Email</button><br />
+                    <button href={shareTextMessage}>Share via SMS</button><br />
                     <button onClick={copyLinkToClipboard}>Copy Link</button>
                 </Box>
             )}
