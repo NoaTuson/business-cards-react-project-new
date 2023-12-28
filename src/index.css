@@ -195,6 +195,11 @@ background-color: var(--button-background-color);
 .card-item h3 {
     margin: 0 0 10px 0;
 }
+a {
+    font-family: "Roboto-Light";
+    font-style: none;
+    color: var(--button-text-color);
+}
 
 .card-item {
     background-color: var(--card-item-background-color);
@@ -222,11 +227,6 @@ background-color: var(--button-background-color);
     justify-content: center;
 }
 
-a {
-    font-family: "Roboto-Light";
-    font-style: none;
-    color: var(--button-text-color);
-}
 
 /* Responsive design: Adjusting grid for different screen sizes */
 @media (max-width: 1200px) {

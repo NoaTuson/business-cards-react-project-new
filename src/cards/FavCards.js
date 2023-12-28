@@ -33,9 +33,9 @@ export default function FavCards() {
 	};
 
 	return (
-		<div>
+		<div >
 			<h2 className="tempTitle">Favorite Cards</h2>
-			<div>
+			<div className="cards-container">
 				{favCards.map((card) => (
 					<Card
 						key={card.id}
