@@ -8,11 +8,16 @@ import Loader from "./components/Loader";
 export const GeneralContext = createContext();
 export const ThemeContext = createContext();
 
+
 function App() {
 	const [user, setUser] = useState();
 	const [loader, setLoader] = useState(true);
 	const [userRoleType, setUserRoleType] = useState(RoleTypes.none);
-	 const [theme, setTheme] = useState('light');
+	const [theme, setTheme] = useState('dark');
+
+	const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+};
 
 	useEffect(() => {
 		fetch(`https://api.shipap.co.il/clients/login`, {
@@ -48,10 +53,12 @@ function App() {
 			value={{ user, setUser, setLoader, userRoleType, setUserRoleType }}
 		>
 			<ThemeContext.Provider value={{ theme, setTheme }}>
-            <div className={theme}></div>
+            <div className={theme}>
 			<Navbar />
+			<button onClick={toggleTheme}>Toggle Theme</button>
 			<Router />
 			{loader && <Loader />}
+			</div>
 			</ThemeContext.Provider>
 		</GeneralContext.Provider>
 	);
