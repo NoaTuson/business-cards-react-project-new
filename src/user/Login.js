@@ -13,6 +13,7 @@ import { useContext, useState } from "react";
 import { GeneralContext } from "../App";
 import { RoleTypes } from "../components/Navbar";
 import Joi from "joi";
+import "../index.css";
 
 const defaultTheme = createTheme();
 

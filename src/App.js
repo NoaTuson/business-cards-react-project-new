@@ -4,6 +4,7 @@ import Router from "./Router";
 import Navbar, { RoleTypes } from "./components/Navbar";
 import Loader from "./components/Loader";
 import Footer from "./components/Footer";
+import "./index.css";
 
 
 export const GeneralContext = createContext();
@@ -14,7 +15,7 @@ function App() {
 	const [user, setUser] = useState();
 	const [loader, setLoader] = useState(true);
 	const [userRoleType, setUserRoleType] = useState(RoleTypes.none);
-	const [theme, setTheme] = useState('dark');
+	const [theme, setTheme] = useState('light');
 
 
 

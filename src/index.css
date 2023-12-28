@@ -4,11 +4,26 @@
     @font-face {
     font-family: "Roboto-Light";
     src: url("fonts/Roboto-Light.ttf") format("truetype");
+
+
+
     }
 
+    --navbar-background-color: #8080a0;
+    --navbar-text-color: #000;
+    --footer-background-color: #8080a0;
+    --footer-text-color: #000;
+    --font-size-normal: 16px;
+    --font-size-large: 20px;
+
     h3{
-        margin: 3rem;
-        font-size: 20px;
+        margin: 2.5rem;
+        font-size: 30px;
+        font-weight:lighter;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
     }
         h1, h2{
         margin: 1rem;
@@ -20,12 +35,17 @@
         align-items: center;
     }
 
+
     
     }
 
     [data-theme="dark"] {
     --background-color: #68607a;
     --text-color: #fff;
+    --navbar-background-color: #373144; /* Dark mode color */
+    --navbar-text-color: #fff;
+    --footer-background-color: #373144;
+    --footer-text-color: #fff;
     }
 
     body {
@@ -34,4 +54,5 @@
     color: var(--text-color);
     font-family: var(--font-family), sans-serif;
     }
+
 

@@ -15,7 +15,7 @@ import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import { Link, useNavigate, useResolvedPath } from "react-router-dom";
 import { GeneralContext } from "../App";
 import Brightness4Icon from '@mui/icons-material/Brightness4';
-
+import "../index.css";
 
 export const RoleTypes = {
 	none: 0,
@@ -93,7 +93,7 @@ function Navbar() {
 	};
 
 	return (
-		<AppBar position="static" sx={{ bgcolor: "#3e374d", boxShadow: "none" }}>
+		<AppBar  style={{ backgroundColor: "var(--navbar-background-color)", color: "var(--navbar-text-color)" , fontFamily: "var(--font-family)", fontSize: "var(--font-size-large)" }}position="static" sx={{ boxShadow: "none" }}>
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
 					<RecentActorsIcon
@@ -111,12 +111,10 @@ function Navbar() {
 						sx={{
 							mr: 2,
 							display: { xs: "none", md: "flex" },
-							fontFamily: "Roboto-Light",
-							fontWeight: 800,
-							fontSize: 25,
 							letterSpacing: ".1rem",
 							color: "inherit",
 							textDecoration: "none",
+							fontWeight: "bold",
 						}}
 					>
 						Bcards
@@ -186,8 +184,6 @@ function Navbar() {
 							mr: 2,
 							display: { xs: "flex", md: "none" },
 							flexGrow: 1,
-							fontFamily: "Roboto-Light",
-							fontWeight: 700,
 							letterSpacing: ".1rem",
 							color: "inherit",
 							textDecoration: "none",

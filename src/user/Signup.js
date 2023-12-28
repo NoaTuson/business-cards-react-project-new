@@ -13,6 +13,7 @@ import { useContext } from "react";
 import { GeneralContext } from "../App";
 import Switch from "@mui/material/Switch";
 import { FormControlLabel } from "@mui/material";
+import "../index.css";
 
 const defaultTheme = createTheme();
 

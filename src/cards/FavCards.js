@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card"; // Assuming you have a Card component to display each card
+import "../index.css";
 
 export default function FavCards() {
 	const [favCards, setFavCards] = useState([]);

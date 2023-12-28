@@ -11,6 +11,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import { Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import "../index.css";
 
 
 export default function MyCard({ card, onFavoriteChange, isAdmin }) {

@@ -3,14 +3,14 @@ import AppBar from "@mui/material/AppBar";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-
+import "../index.css";
 function Footer() {
 	return (
-		<AppBar 
+		<AppBar  style={{ backgroundColor: "var(--navbar-background-color)", color: "var(--navbar-text-color)", top: 'auto', bottom: 0, fontFamily: "Roboto-Light", fontSize: "var(--font-size-normal)"  }}
 			position="fixed"
-            style={{ top: 'auto', bottom: 0 }}
+            
             maxWidth="200px"
-            sx={{ bgcolor: "#3e374d", boxShadow: "none" }}
+            sx={{ boxShadow: "none" }}
 		>
 			<div
 				class="container p-4"
@@ -21,6 +21,8 @@ function Footer() {
 					flexDirection: "column",
 					alignItems: "center",
 					fontFamily: "Roboto-Light",
+					fontSize: 15
+					
 				}}
 			>
 				For any technical difficultie, Please contact us via our Email Address
@@ -38,6 +40,8 @@ function Footer() {
 					flexDirection: "column",
 					justifyContent: "center",
 					alignItems: "center",
+					fontFamily: "Roboto-Light",
+					fontSize: 15
 				}}
 			>
 				<Typography
@@ -48,14 +52,13 @@ function Footer() {
 					sx={{
 						mr: 2,
 						display: { xs: "none", md: "flex" },
-						fontFamily: "Roboto-Light",
-						fontWeight: 20,
-						fontSize: 16,
 						letterSpacing: ".1rem",
 						color: "inherit",
+						fontFamily: "Roboto-Light",
 						textDecoration: "none",
 						justifyContent: "center",
 						alignItems: "center",
+						fontSize: 15
 					}}
 				>
 					{"© 2023 Copyright: "}
@@ -74,14 +77,13 @@ function Footer() {
 						mr: 2,
 						display: { xs: "flex", md: "none" },
 						flexGrow: 1,
-						fontFamily: "Roboto-Light",
-						fontWeight: 20,
-						fontSize: 16,
 						letterSpacing: ".1rem",
 						color: "inherit",
 						textDecoration: "none",
 						justifyContent: "center",
+						fontFamily: "Roboto-Light",
 						alignItems: "center",
+						fontSize: 15
 					}}
 				>
 					{"Copyright ©-  "}
