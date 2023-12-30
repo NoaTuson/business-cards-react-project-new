@@ -108,7 +108,7 @@ const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-s
 
 // Create a theme instance.
 const theme = useMemo(
-	() => createTheme({
+() => createTheme({
 	palette: {
 		mode: prefersDarkMode ? 'dark' : 'light',
 		primary: {
@@ -180,7 +180,7 @@ const theme = useMemo(
 
 	return (
 		<ThemeProvider theme={theme}>
-			<Container component="main" maxWidth="xs">
+			<Container style={{ backgroundColor: "var(--navbar-background-color)", color: "var(--navbar-text-color)" , fontFamily: "var(--font-family)", fontSize: "var(--font-size-large)" }} component="main" maxWidth="xs">
 				<CssBaseline />
 				<Box
 					sx={{
@@ -190,7 +190,7 @@ const theme = useMemo(
 						alignItems: "center",
 					}}
 				>
-					<Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+					<Avatar sx={{ m: 1,backgroundColor: "var(--navbar-background-color)" }}>
 						<LockOutlinedIcon />
 					</Avatar>
 					<Typography component="h1" variant="h5">
