@@ -9,14 +9,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext,useMemo } from "react";
 import { GeneralContext } from "../App";
 import Switch from "@mui/material/Switch";
 import { FormControlLabel } from "@mui/material";
 import { clientStructure } from "./Signup";
 import "../index.css";
 
-const defaultTheme = createTheme();
 
 export default function Account() {
 	const navigate = useNavigate();
@@ -51,11 +50,79 @@ export default function Account() {
 			setLoader(false);
 		});
 	};
-
+	const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+// Create a theme instance.
+const theme = useMemo(
+() => createTheme({
+	palette: {
+		mode: prefersDarkMode ? 'dark' : 'light',
+		primary: {
+		main: prefersDarkMode ? '#473f57' : '#8080a0',
+		},
+		secondary: {
+		main: prefersDarkMode ? '#68607a' : '#a9a9d3',
+		},
+		error: {
+		main: prefersDarkMode ? '#ff6b81' : '#e57373',
+		},
+		background: {
+		default: prefersDarkMode ? '#68607a' : '#d7d7eb',
+		paper: prefersDarkMode ? '#473f57' : '#a9a9d3',
+		},
+		text: {
+		primary: prefersDarkMode ? '#ffffff' : '#000000',
+		secondary: prefersDarkMode ? '#ffffff' : '#000000',
+		},
+	},
+	components: {
+		// Override styles for components here
+		MuiButton: {
+		styleOverrides: {
+			root: {
+			// Apply CSS variable here
+			backgroundColor: 'var(--button-background-color)',
+			color: 'var(--button-text-color)',
+			'&:hover': {
+				backgroundColor: 'var(--button-background-color)',
+				// Increase the specificity for the pseudo class
+				'@media (hover: none)': {
+				backgroundColor: 'var(--button-background-color)',
+				},
+			},
+			},
+		},
+		},
+		MuiTextField: {
+		styleOverrides: {
+			root: {
+			'& label.Mui-focused': {
+				color: 'var(--text-color)',
+			},
+			'& .MuiInput-underline:after': {
+				borderBottomColor: 'var(--text-color)',
+			},
+			'& .MuiOutlinedInput-root': {
+				'& fieldset': {
+				borderColor: 'var(--text-color)',
+				},
+				'&:hover fieldset': {
+				borderColor: 'var(--text-color)',
+				},
+				'&.Mui-focused fieldset': {
+				borderColor: 'var(--text-color)',
+				},
+			},
+			},
+		},
+		},
+	},
+	}),
+[prefersDarkMode]
+);
 	return (
-		<ThemeProvider theme={defaultTheme}>
+		<ThemeProvider theme={theme}>
 			{user ? (
-				<Container component="main" maxWidth="xs">
+				<Container  style={{ backgroundColor: "var(--navbar-background-color)", color: "var(--navbar-text-color)" , fontFamily: "var(--font-family)", fontSize: "var(--font-size-large)" }} component="main" maxWidth="xs">
 					<CssBaseline />
 					<Box
 						sx={{
@@ -65,7 +132,7 @@ export default function Account() {
 							alignItems: "center",
 						}}
 					>
-						<Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+						<Avatar sx={{ m: 1,backgroundColor: "var(--navbar-background-color)"}}>
 							<LockOutlinedIcon />
 						</Avatar>
 						<Typography component="h1" variant="h5">
