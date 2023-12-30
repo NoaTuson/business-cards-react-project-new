@@ -8,7 +8,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
 import { useContext,useMemo } from "react";
 import { GeneralContext } from "../App";
 import Switch from "@mui/material/Switch";
@@ -18,7 +17,6 @@ import "../index.css";
 
 
 export default function Account() {
-	const navigate = useNavigate();
 	const { user, setUser, setLoader } = useContext(GeneralContext);
 
 	const handleSubmit = (ev) => {

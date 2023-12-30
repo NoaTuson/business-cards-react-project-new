@@ -112,24 +112,6 @@
 	</div>
 	);
 
-	
-	const renderCards = () => (
-		<div className="cards-display">
-		{cards.map((card) => (
-			<div key={card.id} className="card-item">
-			<div className="card-details">
-				<h3>{card.title}</h3>
-				<p>{card.description}</p>
-				{/* Display other card details as needed */}
-			</div>
-			<div className="card-actions">
-				<button onClick={() => setEditingCard(card)}>Edit</button>
-				<button onClick={() => deleteCard(card.id)}>Delete</button>
-			</div>
-			</div>
-		))}
-		</div>
-	);
 
 
 	const renderEditForm = () => {

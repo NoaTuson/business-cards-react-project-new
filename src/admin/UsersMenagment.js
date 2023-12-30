@@ -200,7 +200,7 @@ const deleteCard = (cardId) => {
 
 
     const renderUsersList = () => (
-        <div className="users-list">
+        <div className="share-panel">
         {users.map(user => (
             <div key={user.id} className="user-item">
             <span>{user.fullName}</span>
@@ -225,25 +225,13 @@ const deleteCard = (cardId) => {
         )
     );
 
-    const renderUserCards = () => (
-        <div className="user-cards">
-        {selectedUserCards.map(card => (
-            <div key={card.id} className="card-item">
-            <h4>{card.title}</h4>
-            {/* Render other card details */}
-            <button onClick={() => editCard(card.id)}>Edit</button>
-            <button onClick={() => deleteCard(card.id)}>Delete</button>
-            </div>
-        ))}
-        </div>
-    );
 
 const renderCardsList = () => (
     <div className="cards-list">
         {cards.map(card => (
             <div key={card.id} className="card-item">
                 <span>{card.title}</span>
-                <div className="card-actions">
+                <div className="share-panel">
                     <button onClick={() => renderEditForm(card)}>Edit</button>
                     <button onClick={() => deleteCard(card.id)}>Delete</button>
                 </div>
