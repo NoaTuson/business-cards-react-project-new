@@ -2,7 +2,7 @@ import { useState, createContext, useEffect } from "react";
 import "./App.css";
 import Router from "./Router";
 import Navbar, { RoleTypes } from "./components/Navbar";
-import Loader from "./components/Loader";
+
 import Footer from "./components/Footer";
 import "./index.css";
 
@@ -13,7 +13,7 @@ export const ThemeContext = createContext();
 
 function App() {
 	const [user, setUser] = useState();
-	const [loader, setLoader] = useState(true);
+	const [ setLoader] = useState(true);
 	const [userRoleType, setUserRoleType] = useState(RoleTypes.none);
 	const [theme, setTheme] = useState('light');
 
@@ -45,7 +45,7 @@ function App() {
 			.catch((err) => {
 				setUserRoleType(RoleTypes.none);
 			})
-			.finally(() => setLoader(false));
+			
 	}, []);
 
 	return (
@@ -56,7 +56,6 @@ function App() {
             <div className={theme}></div>
 			<Navbar />
 			<Router />
-			{loader && <Loader />}
 			<Footer />
 			</ThemeContext.Provider>
 		</GeneralContext.Provider>
