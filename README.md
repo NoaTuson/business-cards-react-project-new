@@ -42,8 +42,8 @@ This will launch the application on `localhost:3000`.
 - Login Admin- noatu1999@gmail.com password 2029
 - Business users
 - nish12@nish12.com password 12345
-- dol@dol.com password 12345
+- dol1@dol1.com password 12345
 - Regular users
-- shani@shani.com password 12345
-- ronen@ronen.com password 12345
+- shani1@shani1.com password 12345
+- ronen3@ronen3.com password 12345
 
