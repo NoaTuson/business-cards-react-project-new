@@ -108,15 +108,22 @@ h3 {
     object-fit: cover; /* Ensures image covers the area properly */
 }
 
-.card-content {
+.card-content{
     background-color: var(--card-item-background-color);
     color: var(--text-color);
     padding: 15px;
-    font-size: var(--font-size-normal);
+    font-size: 20px;
+    font-family: "Roboto-Light";
     line-height: 1.5; /* Better readability for text */
         flex: 1; /* This will make the content grow to fill the space, pushing the actions to the bottom */
     padding: 15px;
 }
+
+.user-details {color: var(--text-color);
+    padding: 15px;
+    font-size: 20px;
+    font-family: "Roboto-Light";}
+
 
 .card-actions {
     background-color: var(--card-item-background-color);
@@ -164,6 +171,7 @@ h3 {
     border-radius: 5px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
     border: 1px solid #677086;
+    align-items: center;
 }
 
  .share-panel button{

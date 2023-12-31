@@ -1,285 +1,466 @@
     import React, { useState, useEffect } from 'react';
     import "../index.css";
 
+    const clientStructure = [
+    { label: 'First Name', name: 'firstName', required: true },
+    { label: 'Middle Name', name: 'middleName', required: false },
+    { label: 'Last Name', name: 'lastName', required: true },
+    { label: 'Phone', name: 'phone', required: true },
+    { label: 'Email', name: 'email', required: true },
+    { label: 'Img Url', name: 'imgUrl', required: false },
+    { label: 'Img Alt', name: 'imgAlt', required: false },
+    { label: 'State', name: 'state', required: false },
+    { label: 'Country', name: 'country', required: true },
+    { label: 'City', name: 'city', required: true },
+    { label: 'Street', name: 'street', required: false },
+    { label: 'House Number', name: 'houseNumber', required: false },
+    { label: 'Zip', name: 'zip', required: false },
+    { label: 'Business', name: 'business', type: 'boolean', required: false },
+    ];
+
     const initialCardState = {
-	title: "",
-	description: "",
-	subtitle: "",
-	phone: "",
-	email: "",
-	web: "",
-	imgUrl: "",
-	imgAlt: "",
-	state: "",
-	country: "",
-	city: "",
-	street: "",
-	houseNumber: 0,
-	zip: "",
-	};
+    title: "",
+    description: "",
+    subtitle: "",
+    phone: "",
+    email: "",
+    web: "",
+    imgUrl: "",
+    imgAlt: "",
+    state: "",
+    country: "",
+    city: "",
+    street: "",
+    houseNumber: 0,
+    zip: "",
+    };
 
     const UsersManagement = () => {
+    // State hooks for users, cards, selected user, etc.
     const [users, setUsers] = useState([]);
     const [cards, setCards] = useState([]);
-    const [setNewCard] = useState(initialCardState);
-    const [editingCard, setEditingCard] = useState(null);
     const [selectedUser, setSelectedUser] = useState(null);
-    const [selectedUserCards, setSelectedUserCards] = useState([]);
-    const apiToken = '7cddfc3e-a309-11ee-beec-14dda9d4a5f0';
+    const [editUser, setEditUser] = useState(null);
+    const [editingCard, setEditingCard] = useState(null);
+    const [ setNewCard] = useState(initialCardState); // Make sure to define 'newCard'
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [ setSelectedUserCards] = useState([]);
+
 
     useEffect(() => {
-    // Call fetch functions when the component mounts
-    fetchAllUsers();
-    fetchAllCards();
+
+    let isSubscribed = true;
+
+    (async () => {
+        if (isSubscribed) {
+            await fetchAllUsers();
+            await fetchAllCards();
+        }
+    })();
+
+    // Cleanup function
+    return () => {
+        isSubscribed = false;
+    };
     }, []);
 
-    const fetchAllUsers = () => {
-        fetch(`https://api.shipap.co.il/admin/clients?token=${apiToken}`, {
-        credentials: 'include',
-        })
-        .then(res => res.json())
-        .then(setUsers)
-        .catch(error => console.error('Error fetching users:', error));
+
+
+
+        // Function to fetch all users
+        const fetchAllUsers = async () => {
+        setIsLoading(true);
+        try {
+            const response = await fetch(`https://api.shipap.co.il/admin/clients?token=7cddfc3e-a309-11ee-beec-14dda9d4a5f0`, {
+            credentials: 'include',
+            });
+            if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            setUsers(data);
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setIsLoading(false);
+        }
+        };
+
+            // Handle selection of a client from the list
+    const handleClientSelect = (client) => {
+        setSelectedUser(client);
     };
 
-
-    const editUser = (userId, userData) => {
-        fetch(`https://api.shipap.co.il/admin/clients/${userId}?token=${apiToken}`, {
-        credentials: 'include',
-        method: 'PUT',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify(userData),
-        })
-        .then(() => fetchAllUsers())
-        .catch(error => console.error('Error editing user:', error));
+    // Handle initiation of client edit
+    const handleEditClient = (client) => {
+        setEditUser(client); 
     };
 
-    const deleteUser = (userId) => {
-        fetch(`https://api.shipap.co.il/admin/clients/${userId}?token=${apiToken}`, {
-        credentials: 'include',
-        method: 'DELETE',
-        })
-        .then(() => fetchAllUsers())
-        .catch(error => console.error('Error deleting user:', error));
-    };
-
-const viewUser = (userId) => {
-    fetch(`https://api.shipap.co.il/admin/clients?token=7cddfc3e-a309-11ee-beec-14dda9d4a5f0`, {
-        credentials: 'include',
-    })
-    .then(response => {
+    const handleDeleteClient = async (clientId) => {
+        setIsLoading(true);
+        setError(null);
+        try {
+        const response = await fetch(`https://api.shipap.co.il/admin/clients/${clientId}?token=7cddfc3e-a309-11ee-beec-14dda9d4a5f0`, {
+            method: 'DELETE',
+            credentials: 'include',
+        });
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        return response.json();
-    })
-    .then(data => {
-        const userToView = data.find(user => user.id === userId);
-        setSelectedUser(userToView);
-    })
-    .catch(error => {
-        console.error('Error fetching user details:', error);
-    });
-};
-
-
-    const fetchAllCards = () => {
-    fetch(`https://api.shipap.co.il/cards?token=${apiToken}`, {
-        credentials: 'include',
-        method: 'GET',
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (Array.isArray(data)) {
-        setCards(data);
-        } else {
-        throw new Error('Data is not an array');
+        // Assuming the API response is an array of remaining users after deletion
+        const updatedUsers = await response.json();
+        setUsers(updatedUsers);
+        } catch (error) {
+        setError(error.message);
+        } finally {
+        setIsLoading(false);
         }
-    })
-    .catch(error => {
-        console.error('Error fetching all cards:', error);
-    });
     };
 
-    const viewUserCards = (userId) => {
-    fetch(`https://api.shipap.co.il/admin/cards/${userId}?token=${apiToken}`, {
-        credentials: 'include',
-    })
-    .then(res => {
-        if (!res.ok) {
-            throw new Error('Network response was not ok');
+    // View details of a specific user
+    const viewUser = (userId) => {
+        setIsLoading(true);
+        setError(null);
+        try {
+        const userToView = users.find(user => user.id === userId);
+        if (userToView) {
+            setSelectedUser(userToView);
+        } else {
+            throw new Error('User not found');
         }
-        return res.json();
-    })
-    .then(data => {
-        setSelectedUserCards(data); // Assuming 'data' is an array of card objects
-    })
-    .catch(error => {
-        console.error('Error fetching cards for user:', error);
-        setSelectedUserCards([]); // Reset to an empty array on error
-    });
-};
+        } catch (error) {
+        setError(error.message);
+        } finally {
+        setIsLoading(false);
+        }
+    };
 
 
-const editCard = (event) => {
-    event.preventDefault();
 
-    fetch(`https://api.shipap.co.il/business/cards/${editingCard.id}?token=${apiToken}`, {
-        credentials: 'include',
-        method: 'PUT',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify(editingCard),
-    })
-    .then(response => {
-        console.log("Raw response:", response); // Debugging: Log raw response
+        // Function to fetch all cards
+        const fetchAllCards = async () => {
+        try {
+            const response = await fetch(`https://api.shipap.co.il/cards?token=7cddfc3e-a309-11ee-beec-14dda9d4a5f0`, {
+            credentials: 'include',
+            });
+            if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            setCards(data);
+        } catch (error) {
+            setError(error.message);
+        }
+        };
+
+
+    // View cards associated with a specific user
+    const viewUserCards = async (userId) => {
+        setIsLoading(true);
+        setError(null);
+        try {
+        const response = await fetch(`https://api.shipap.co.il/cards?token=7cddfc3e-a309-11ee-beec-14dda9d4a5f0`, {
+            credentials: 'include',
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setSelectedUserCards(data); // Assuming setSelectedUserCards is a state setter
+        } catch (error) {
+        setError(error.message);
+        } finally {
+        setIsLoading(false);
+        }
+    };
+
+    const editCard = async (event) => {
+        event.preventDefault();
+        setIsLoading(true);
+        setError(null);
+
+        try {
+        const response = await fetch(`https://api.shipap.co.il/business/cards/${editingCard.id}?token=7cddfc3e-a309-11ee-beec-14dda9d4a5f0`, {
+            method: 'PUT',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(editingCard), 
+            credentials: 'include',
+        });
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        // Check if the response has content before parsing as JSON
-        return response.text().then(text => text ? JSON.parse(text) : {});
-    })
-    .then(data => {
-        console.log("Response data:", data); // Debugging: Log response data
-
-        fetchAllCards();
-        setEditingCard(null);
-    })
-    .catch(error => {
-        console.error("Error updating card:", error);
+        const updateCardsState = (updatedCard) => {
+    setCards((prevCards) => {
+        return prevCards.map((card) => {
+            if (card.id === updatedCard.id) {
+                return updatedCard;
+            }
+            return card;
+        });
     });
-};
+    };
 
+        const updatedCard = await response.json();
+        updateCardsState(updatedCard);
+        } catch (error) {
+        setError(error.message);
+        } finally {
+        setIsLoading(false);
+        }
+    };
 
-const handleInputChange = (event, isEditing = false) => {
-	const { name, value } = event.target;
-	if (isEditing) {
-		// Update editingCard state for edits
-		setEditingCard((prevCard) => ({
-		...prevCard,
-		[name]: value
-		}));
-	} else {
-		// Update newCard state for new entries
-		setNewCard((prevCard) => ({
-		...prevCard,
-		[name]: value
-		}));
-	}
-	};
+    // Function to handle input changes for both new and editing cards
+    const handleInputChange = (event, isEditing = false) => {
+        const { name, value } = event.target;
+        if (isEditing) {
+        // Update editingCard state for edits
+        setEditingCard(prevCard => ({
+            ...prevCard,
+            [name]: value
+        }));
+        } else {
+        // Update newCard state for new entries
+        setNewCard(prevCard => ({
+            ...prevCard,
+            [name]: value
+        }));
+        }
+    };
 
-
-const deleteCard = (cardId) => {
-    fetch(`https://api.shipap.co.il/admin/cards/${cardId}?token=${apiToken}`, {
+    const deleteCard = async (cardId) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+        const response = await fetch(`https://api.shipap.co.il/admin/cards/${cardId}?token=7cddfc3e-a309-11ee-beec-14dda9d4a5f0`, {
         method: 'DELETE',
         credentials: 'include',
-    })
-    .then(response => {
-        console.log("Raw response:", response); // Debugging: Log raw response
-
+        });
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP error! Status: ${response.status}`);
         }
+        // Remove the deleted card from the local state
+        setCards(prevCards => prevCards.filter(card => card.id !== cardId));
+    } catch (error) {
+        setError(error.message);
+    } finally {
+        setIsLoading(false);
+    }
+    };
 
-        // Check if the response has content before parsing as JSON
-        return response.text().then(text => text ? JSON.parse(text) : {});
-    })
-    .then(data => {
-        console.log("Response data:", data); // Debugging: Log response data
+    const renderFormFields = () => {
+        return clientStructure.map((field) => (
+            <label key={field.name}>
+                {field.label}:
+                <input
+                    type={field.type === 'boolean' ? 'checkbox' : 'text'}
+                    name={field.name}
+                    required={field.required}
+                    value={formData[field.name] || ''}
+                    onChange={handleChange}
+                />
+            </label>
+        ));
+    };
 
-        if (selectedUser) {
-            viewUserCards(selectedUser.id);
-        }
-        fetchAllCards(); 
-    })
-    .catch(error => {
-        console.error('Error deleting card:', error);
-    });
-};
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value,
+        }));
+    };
 
 
-    const renderUsersList = () => (
-        <div className="share-panel">
-        {users.map(user => (
-            <div key={user.id} className="user-item">
-            <span>{user.fullName}</span>
-            <span>{user.email}</span>
-            <div className="user-actions">
-                <button onClick={() => viewUser(user.id)}>View</button>
-                <button onClick={() => setSelectedUser(user)}>Edit</button>
-                <button onClick={() => deleteUser(user.id)}>Delete</button>
+    const renderUsersList = ({ clients, onSelectClient, onEditClient, onDeleteClient, onViewUserCards }) => {
+        return (
+            <div className="share-panel">
+                {clients.map(client => (
+                    <div key={client.id} className="user-item">
+                        <span>{client.firstName} {client.lastName}</span>
+                        <div className="user-actions">
+                            <button onClick={() => onSelectClient(client)}>view</button>
+                            <button onClick={() => onEditClient(client)}>Edit</button>
+                            <button onClick={() => onDeleteClient(client.id)}>Delete</button>
+
+                        </div>
+                    </div>
+                ))}
             </div>
-            </div>
-        ))}
-        </div>
-    );
+        );
+    };
 
-    const renderUserDetails = () => (
-        selectedUser && (
+
+    const renderUserDetails = ({ client }) => {
+    return client && (
         <div className="user-details">
-            {/* Render the details of the selectedUser */}
-            <h3>{selectedUser.fullName}</h3>
-            {/* Include other details you want to display */}
+        <h2>User Details</h2>
+        <p>Name: {client.firstName} {client.lastName}</p>
+        <p>Email: {client.email}</p>
+        <p>Phone: {client.phone}</p>
+        <p>Country: {client.country}</p>
+        <p>City: {client.city}</p>
+        <p>Business: {client.business? 'yes' : 'no'}</p>
         </div>
-        )
     );
+    };
+
+    const EditClientForm = ({ onClientUpdated }) => {
+        const formFields = renderFormFields();
+
+    return (
+            <form onSubmit={handleSubmit} className="card-edit-form">
+                {formFields}
+                <button type="submit">Update Client</button>
+            </form>
+        );
+    };
 
 
-const renderCardsList = () => (
-    <div className="cards-list">
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setIsLoading(true);
+        try {
+            const response = await fetch(`https://api.shipap.co.il/admin/clients/${editUser.id}?token=7cddfc3e-a309-11ee-beec-14dda9d4a5f0`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+                credentials: 'include',
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const updatedClient = await response.json();
+            // Update the users state or perform other actions after client update
+            setUsers((prevUsers) => 
+            prevUsers.map((user) => (user.id === updatedClient.id ? updatedClient : user))
+            );
+            setEditUser(null); // Reset the editUser state if needed
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+
+    const [formData, setFormData] = useState({ ...editUser });
+
+
+
+    const renderCardsList = () => {
+    return (
+        <div className="cards-list">
         {cards.map(card => (
             <div key={card.id} className="card-item">
-                <span>{card.title}</span>
-                <div className="share-panel">
-                    <button onClick={() => renderEditForm(card)}>Edit</button>
-                    <button onClick={() => deleteCard(card.id)}>Delete</button>
-                </div>
+            <span>{card.title}</span>
+            <div className="share-panel">
+                <button onClick={() => renderEditForm(card)}>Edit</button>
+                <button onClick={() => deleteCard(card.id)}>Delete</button>
+            </div>
             </div>
         ))}
-        {editingCard && renderEditFormUI()}
-    </div>
-);
+        </div>
+    );
+    };
 
 
-const renderEditForm = (card) => {
-    setEditingCard(card);
-};
+    const renderEditForm = (card) => {
+    setEditingCard(card); // Set the currently editing card
+    if (!card) {
+        // Handle the null case appropriately, e.g., by returning null or a message
+        return <p>No card selected for editing.</p>;
+    }
 
-const renderEditFormUI = () => {
+    // Proceed as before since card is not null
+    return (
+        <form onSubmit={(event) => editCard(event, card.id)} className="card-edit-form">
+            <label>
+                Title:
+                <input 
+                    type="text" 
+                    name="title" 
+                    value={card.title} 
+                    onChange={(event) => handleInputChange(event, true)}
+                />
+            </label>
+            <label>
+                Description:
+                <textarea 
+                    name="description" 
+                    value={card.description} 
+                    onChange={(event) => handleInputChange(event, true)}
+                ></textarea>
+            </label>
+            {/* Add more fields as needed */}
+            <button type="submit">Save Changes</button>
+        </form>
+    );
+    };
+
+    const renderEditFormUI = () => {
+    // Check if there is a card currently being edited
     if (!editingCard) return null;
 
     return (
+        <div className="edit-form-container-admin">
+        <h2>Edit Card</h2>
         <form onSubmit={editCard} className="card-edit-form">
-            {Object.entries(initialCardState).map(([key]) => (
+            {Object.entries(initialCardState).map(([key, value]) => (
+            <div key={key} className="form-field">
+                <label htmlFor={key}>{key.charAt(0).toUpperCase() + key.slice(1)}:</label>
                 <input
-                    key={key}
-                    type={key === 'email' ? 'email' : key === 'phone' ? 'tel' : 'text'}
-                    name={key}
-                    value={editingCard[key]}
-                    onChange={(event) => handleInputChange(event, true)}
-                    placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
-                    required={key !== 'imgUrl' && key !== 'imgAlt' && key !== 'state' && key !== 'zip'}
+                type={key === 'email' ? 'email' : 'text'}
+                id={key}
+                name={key}
+                value={editingCard[key] || ''}
+                onChange={(event) => handleInputChange(event, true)}
+                required={key !== 'imgUrl' && key !== 'imgAlt'}
                 />
+            </div>
             ))}
+            <div className="form-actions">
             <button type="submit">Save Changes</button>
             <button type="button" onClick={() => setEditingCard(null)}>Cancel</button>
+            </div>
         </form>
+        </div>
     );
-};
+    };
 
     return (
         <div className="users-management">
         <h2>User Management</h2>
-        {renderUsersList()}
-        {renderUserDetails()}
+        {isLoading ? <p>Loading...</p> : renderUsersList({
+                clients: users,
+                onSelectClient: handleClientSelect,
+                onEditClient: handleEditClient,
+                onDeleteClient: handleDeleteClient,
+                onViewUser: viewUser,
+                onViewUserCards: viewUserCards  // Pass the function as a prop
+        })}
 
-        <div>
+        {/* Displaying errors if any */}
+        {error && <p className="error-message">{error}</p>}
+
+        {/* User Details */}
+        {selectedUser && renderUserDetails({ client: selectedUser })}
+
+        {/* Edit Client Form - shown when a client is being edited */}
+        {editUser && <EditClientForm onClientUpdated={setUsers} />}
+
         <h2>User Cards</h2>
-        {renderCardsList()}
-        </div>
-        </div>
 
+        {/* Cards List */}
+        {cards.length > 0 ? renderCardsList() : <p>No cards available.</p>}
+
+        {/* Edit Card Form UI */}
+        {editingCard && renderEditFormUI()}
+        </div>
     );
     };
 
