@@ -27,7 +27,7 @@ export default function Login() {
 	const [errors, setErrors] = useState({});
 	const [isFormValid, setIsFormValid] = useState(false);
 	const navigate = useNavigate();
-	const { setUser, setLoader, setUserRoleType } = useContext(GeneralContext);
+	const { setUser , setUserRoleType } = useContext(GeneralContext);
 
 	const schema = Joi.object({
 		email: Joi.string().email({ tlds: false }).required(),
@@ -62,7 +62,7 @@ export default function Login() {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		const data = new FormData(event.currentTarget);
-		setLoader(true);
+		
 
 		fetch(
 			`https://api.shipap.co.il/clients/login?token=7cddfc3e-a309-11ee-beec-14dda9d4a5f0`,
@@ -100,7 +100,7 @@ export default function Login() {
 			.catch((err) => {
 				alert(err.message);
 			})
-			.finally(() => setLoader(false));
+			
 	};
 
 

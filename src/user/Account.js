@@ -17,7 +17,7 @@ import "../index.css";
 
 
 export default function Account() {
-	const { user, setUser, setLoader } = useContext(GeneralContext);
+	const { user, setUser } = useContext(GeneralContext);
 
 	const handleSubmit = (ev) => {
 		ev.preventDefault();
@@ -34,7 +34,7 @@ export default function Account() {
 				}
 			});
 
-		setLoader(true);
+		
 
 		fetch(
 			`https://api.shipap.co.il/clients/update?token=d2960d76-3431-11ee-b3e9-14dda9d4a5f0`,
@@ -45,7 +45,7 @@ export default function Account() {
 				body: JSON.stringify(obj),
 			}
 		).then(() => {
-			setLoader(false);
+
 		});
 	};
 	const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;

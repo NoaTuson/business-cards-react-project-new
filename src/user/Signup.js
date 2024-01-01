@@ -9,8 +9,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useMemo} from "react";
-import { GeneralContext } from "../App";
+import {  useMemo} from "react";
 import Switch from "@mui/material/Switch";
 import { FormControlLabel } from "@mui/material";
 import "../index.css";
@@ -110,7 +109,7 @@ export const clientStructure = [
 
 export default function Signup() {
 	const navigate = useNavigate();
-	const { setLoader } = useContext(GeneralContext);
+	
 
 	const handleSubmit = (ev) => {
 		ev.preventDefault();
@@ -125,7 +124,7 @@ export default function Signup() {
 			}
 		});
 
-		setLoader(true);
+		
 
 		fetch(
 			`https://api.shipap.co.il/clients/signup?token=7cddfc3e-a309-11ee-beec-14dda9d4a5f0`,
@@ -147,7 +146,7 @@ export default function Signup() {
 			})
 			.then(() => navigate("/login"))
 			.catch((err) => alert(err.message))
-			.finally(() => setLoader(false));
+			
 	};
 
 

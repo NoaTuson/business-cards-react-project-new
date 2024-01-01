@@ -50,7 +50,7 @@ function Navbar() {
 	const [anchorElNav, setAnchorElNav] = useState(null);
 		const [theme, setTheme] = useState('light');
 	const [anchorElUser, setAnchorElUser] = useState(null);
-	const { user, setUser, setLoader, userRoleType, setUserRoleType } =
+	const { user, setUser, userRoleType, setUserRoleType } =
 		useContext(GeneralContext);
 	const navigate = useNavigate();
 	const path = useResolvedPath().pathname;
@@ -78,14 +78,14 @@ function Navbar() {
 
 
 	const logout = () => {
-		setLoader(true);
+	
 
 		fetch(`https://api.shipap.co.il/clients/logout`, {
 			credentials: "include",
 		}).then(() => {
 			setUser();
 			setUserRoleType(RoleTypes.none);
-			setLoader(false);
+			
 			navigate("/");
 		});
 

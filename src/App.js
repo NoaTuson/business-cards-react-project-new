@@ -13,7 +13,7 @@ export const ThemeContext = createContext();
 
 function App() {
 	const [user, setUser] = useState();
-	const [ setLoader] = useState(true);
+
 	const [userRoleType, setUserRoleType] = useState(RoleTypes.none);
 	const [theme, setTheme] = useState('light');
 
@@ -50,7 +50,7 @@ function App() {
 
 	return (
 		<GeneralContext.Provider
-			value={{ user, setUser, setLoader, userRoleType, setUserRoleType }}
+			value={{ user, setUser, userRoleType, setUserRoleType }}
 		>
 			<ThemeContext.Provider value={{ theme, setTheme }}>
             <div className={theme}></div>
