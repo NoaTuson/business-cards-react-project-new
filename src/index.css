@@ -37,7 +37,7 @@
 
 body {
     margin: 0;
-    padding-bottom: 100px;
+    padding-bottom: 250px;
     background-color: var(--background-color);
     color: var(--text-color);
     font-family: "Roboto-Light", sans-serif;
@@ -73,7 +73,7 @@ h3 {
 
 .card-root {
     max-width: 350px;
-    height: inherit;
+    height:inherit;
     display: flex;
     flex-direction: column;
     background-color: var(--card-item-background-color);
@@ -240,6 +240,7 @@ a {
     justify-items: center; /* Centers items on the main axis */
     height: calc(100vh - 40px); /* Full height minus padding */
     margin: auto;
+    margin-bottom: 100vh;
     max-width: 1200px; /* Maximum width of the grid */
 }
 

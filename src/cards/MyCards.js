@@ -136,7 +136,7 @@
 	};
 
 	return (
-		<div>
+		<div >
 			<h2>Create Card</h2>
 			{renderCardForm()}
 		<h2>My Cards</h2>
@@ -144,7 +144,7 @@
 		
 		{editingCard ? renderEditForm() : null}
 		{cards.map(card => (
-			<div key={card.id}>
+			<div key={card.id}  className="share-panel">
 			<h3>{card.title}</h3>
 			<button onClick={() => setEditingCard(card)}>Edit</button>
 			<button onClick={() => deleteCard(card.id)}>Delete</button>
