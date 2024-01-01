@@ -144,7 +144,7 @@
 		
 		{editingCard ? renderEditForm() : null}
 		{cards.map(card => (
-			<div key={card.id}  className="share-panel">
+			<div key={card.id}  className="My-Cards-div">
 			<h3>{card.title}</h3>
 			<button onClick={() => setEditingCard(card)}>Edit</button>
 			<button onClick={() => deleteCard(card.id)}>Delete</button>
