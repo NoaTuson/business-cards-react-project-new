@@ -49,22 +49,22 @@ This will launch the application on `localhost:3000`.
 
 ## Screenshots
 
-- Main Page Light 
+- **Main Page Light:** 
 ![My Project Screenshot](https://github.com/NoaTuson/business-cards-react-project-new/blob/main/mainpagelight%20(1).png)
-- Main Page Dark
+- **Main Page Dark:**
 ![My Project Screenshot](https://github.com/NoaTuson/business-cards-react-project-new/blob/main/mainpagedark.png)
-- Share Panel
+- **Share Panel:**
 ![My Project Screenshot](https://github.com/NoaTuson/business-cards-react-project-new/blob/main/share.png)
-- Main Page Guest
+- **Main Page Guest:**
 ![My Project Screenshot](https://github.com/NoaTuson/business-cards-react-project-new/blob/main/guest.png)
-- Login Page 
+- **Login Page:** 
 ![My Project Screenshot](https://github.com/NoaTuson/business-cards-react-project-new/blob/main/login.png)
-- Singup Page 
+- **Singup Page:** 
 ![My Project Screenshot](https://github.com/NoaTuson/business-cards-react-project-new/blob/main/signup.png)
-- About Page 
+- **About Page:** 
 ![My Project Screenshot](https://github.com/NoaTuson/business-cards-react-project-new/blob/main/about.png)
-- My Cards Page- only for business users
+- **My Cards Page- only for business users:**
 ![My Project Screenshot](https://github.com/NoaTuson/business-cards-react-project-new/blob/main/mycards.png)
-- User Menagment Page 
+- **User Menagment Page:** 
 ![My Project Screenshot](https://github.com/NoaTuson/business-cards-react-project-new/blob/main/usermanagament.png)
 
