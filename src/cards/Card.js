@@ -108,12 +108,16 @@ export default function MyCard({ card, onFavoriteChange, isAdmin }) {
 			/>
 			<CardMedia className="card-media"
 				component="img"
-				height="194"
+				height="180"
 				image={card.imgUrl}
 				alt={card.imgAlt}
 			/>
 			<CardContent className="card-content">
-				<Typography>
+				<Typography sx={{
+						color: "inherit",
+						fontFamily: "Roboto-Light",
+						fontSize: 14
+					}}>
 					{card.description}
 				</Typography>
 			</CardContent>

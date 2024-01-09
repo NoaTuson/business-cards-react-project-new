@@ -104,7 +104,7 @@ h3 {
 }
 
 .card-media {
-    height: 450px; /* Height already specified */
+    height: 350px; /* Height already specified */
     object-fit: cover; /* Ensures image covers the area properly */
 }
 
@@ -131,7 +131,6 @@ h3 {
     display: flex;
     justify-content: space-between;
     border-top: 1px solid #d3d3d3; /* Subtle border for separation */
-        margin-top: auto; /* Pushes the actions to the bottom */
 }
 
 .My-Cards-div button{

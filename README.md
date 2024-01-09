@@ -47,3 +47,10 @@ This will launch the application on `localhost:3000`.
 - shani1@shani1.com password 12345
 - ronen3@ronen3.com password 12345
 
+## Screenshots
+
+- React.js
+- React Router for navigation
+- Material-UI for UI components
+- Styled Components for styling
+- Joi for validation
