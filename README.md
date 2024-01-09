@@ -65,6 +65,6 @@ This will launch the application on `localhost:3000`.
 ![My Project Screenshot](https://github.com/NoaTuson/business-cards-react-project-new/blob/main/about.png)
 - **My Cards Page- only for business users:**
 ![My Project Screenshot](https://github.com/NoaTuson/business-cards-react-project-new/blob/main/mycards.png)
-- **User Menagment Page:** 
+- **User Menagment Page- only for admin users:** 
 ![My Project Screenshot](https://github.com/NoaTuson/business-cards-react-project-new/blob/main/usermanagament.png)
 
