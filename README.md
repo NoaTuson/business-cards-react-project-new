@@ -49,7 +49,9 @@ This will launch the application on `localhost:3000`.
 
 ## Screenshots
 
-- React.js
+- Main Page Light 
+![My Project Screenshot](https://github.com/NoaTuson/business-cards-react-project-new/blob/main/mainpagelight%20(1).png)
+
 - React Router for navigation
 - Material-UI for UI components
 - Styled Components for styling
